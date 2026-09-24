@@ -10,29 +10,29 @@
 #' @export
 marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0.05) {
   
-  # 1. Crear tabla de contingencia desde el data.frame
+  # cruzo columnas para sacar la tabla de frecuencias absolutas
   tabla <- table(df[[col_grupo]], df[[col_respuesta]])
   
-  # 2. Calcular totales por grupo (n_j) y éxitos (X_j)
+  # totales por grupo y me quedo solo con los exitos que pide el usuario
   n_j <- rowSums(tabla)
   x_j <- tabla[, as.character(valor_exito)]
   
-  # Calcular proporciones (p_j = X_j / n_j)
+  # calculo las proporciones de cada grupo
   p_j <- x_j / n_j
   k <- length(p_j)
   
-  # 3. Calcular valor crítico Chi-cuadrado
+  # saco los grados de libertad de la tabla para buscar el valor chi-cuadrado critico
   filas <- nrow(tabla)
   columnas <- ncol(tabla)
   grados_libertad <- (filas - 1) * (columnas - 1)
   chi_critico <- qchisq(1 - alpha, df = grados_libertad)
   
-  # 4. Implementar las combinaciones y comparaciones
+  # preparo todas las combinaciones posibles de dos en dos
   nombres_grupos <- names(p_j)
   combinaciones <- combn(nombres_grupos, 2)
   num_comb <- ncol(combinaciones)
   
-  # Preparar tabla de resultados vacía
+  # dataframe vacio para ir rellenandolo en el bucle
   resultados <- data.frame(
     Par = character(num_comb),
     Diferencia_Abs = numeric(num_comb),
@@ -41,7 +41,7 @@ marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0
     stringsAsFactors = FALSE
   )
   
-  # Bucle: evaluar pareja por pareja
+  # evaluo las parejas una a una
   for (i in 1:num_comb) {
     g1 <- combinaciones[1, i]
     g2 <- combinaciones[2, i]
@@ -51,18 +51,19 @@ marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0
     n1 <- n_j[g1]
     n2 <- n_j[g2]
     
-    # Diferencia real absoluta
+    # diferencia real absoluta entre proporciones
     dif_abs <- abs(p1 - p2)
     
-    # Calcular margen de tolerancia (m_jj') con el error estándar
+    # aplico la formula del error estandar y fijo el limite de tolerancia
     error_estandar <- sqrt((p1 * (1 - p1) / n1) + (p2 * (1 - p2) / n2))
     m_jj <- sqrt(chi_critico) * error_estandar
     
-    # Guardar los datos en la tabla de resultados
+    # pongo los resultados a la tabla y compruebo si superan la linea roja
     resultados$Par[i] <- paste(g1, "vs", g2)
     resultados$Diferencia_Abs[i] <- round(dif_abs, 4)
     resultados$Margen_Tolerancia[i] <- round(m_jj, 4)
-    resultados$Significativo[i] <- ifelse(dif_abs > m_jj, "Diferentes", "Estadísticamente iguales")  }
+    resultados$Significativo[i] <- ifelse(dif_abs > m_jj, "Diferentes", "Estadísticamente iguales")
+  }
   
   return(resultados)
   
@@ -78,11 +79,12 @@ marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0
 #' @import ggplot2
 plot_marascuilo <- function(resultados) {
   
+  # por si acaso no la tienen cargada
   require(ggplot2)
   
   grafico <- ggplot(resultados, aes(x = Par, y = Diferencia_Abs, fill = Significativo)) +
     geom_col(alpha = 0.8) +
-    # shape = 4 devuelve la 'X'. show.legend = FALSE la expulsa de los recuadros laterales.
+    # pongo la x indicando el margen y la quito de la leyenda.
     geom_point(aes(y = Margen_Tolerancia), color = "black", size = 4, shape = 4, show.legend = FALSE) +
     scale_fill_manual(
       name = "Conclusión del test:",
