@@ -68,3 +68,31 @@ marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0
   return(resultados)
   
 }
+
+
+#' Gráfico del Test de Marascuilo
+#'
+#' @param resultados Un data.frame generado por la función marascuilo_test().
+#'
+#' @return Un objeto ggplot con la visualización de las comparaciones.
+#' @export
+#' @import ggplot2
+plot_marascuilo <- function(resultados) {
+  
+  # Asegurar que la librería de gráficos está cargada
+  require(ggplot2)
+  
+  grafico <- ggplot(resultados, aes(x = Par, y = Diferencia_Abs, fill = Significativo)) +
+    geom_col(alpha = 0.8) +
+    geom_point(aes(y = Margen_Tolerancia), color = "black", size = 4, shape = 4) +
+    scale_fill_manual(values = c("Sí" = "#02d963", "No" = "#b37079")) +
+    labs(
+      title = "Resultados del Test de Marascuilo",
+      subtitle = "Diferencia real (barras) vs Margen de tolerancia (cruces negras)",
+      x = "Pares comparados",
+      y = "Diferencia absoluta de proporciones"
+    ) +
+    theme_minimal()
+  
+  return(grafico)
+}
