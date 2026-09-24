@@ -62,8 +62,7 @@ marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0
     resultados$Par[i] <- paste(g1, "vs", g2)
     resultados$Diferencia_Abs[i] <- round(dif_abs, 4)
     resultados$Margen_Tolerancia[i] <- round(m_jj, 4)
-    resultados$Significativo[i] <- ifelse(dif_abs > m_jj, "Sí", "No")
-  }
+    resultados$Significativo[i] <- ifelse(dif_abs > m_jj, "Diferentes", "Estadísticamente iguales")  }
   
   return(resultados)
   
@@ -85,7 +84,10 @@ plot_marascuilo <- function(resultados) {
   grafico <- ggplot(resultados, aes(x = Par, y = Diferencia_Abs, fill = Significativo)) +
     geom_col(alpha = 0.8) +
     geom_point(aes(y = Margen_Tolerancia), color = "black", size = 4, shape = 4) +
-    scale_fill_manual(values = c("Sí" = "#02d963", "No" = "#b37079")) +
+    scale_fill_manual(
+      name = "Conclusión del test:",
+      values = c("Diferentes" = "#b37079", "Estadísticamente iguales" = "#02d963")
+    ) +
     labs(
       title = "Resultados del Test de Marascuilo",
       subtitle = "Diferencia real (barras) vs Margen de tolerancia (cruces negras)",
