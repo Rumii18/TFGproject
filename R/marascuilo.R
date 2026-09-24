@@ -27,7 +27,44 @@ marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0
   grados_libertad <- (filas - 1) * (columnas - 1)
   chi_critico <- qchisq(1 - alpha, df = grados_libertad)
   
-  # 4. TAREA PARA TI: Implementar las combinaciones y comparaciones
-  # Aquí debes programar el bucle para las k(k-1)/2 comparaciones...
+  # 4. Implementar las combinaciones y comparaciones
+  nombres_grupos <- names(p_j)
+  combinaciones <- combn(nombres_grupos, 2)
+  num_comb <- ncol(combinaciones)
+  
+  # Preparar tabla de resultados vacía
+  resultados <- data.frame(
+    Par = character(num_comb),
+    Diferencia_Abs = numeric(num_comb),
+    Margen_Tolerancia = numeric(num_comb),
+    Significativo = character(num_comb),
+    stringsAsFactors = FALSE
+  )
+  
+  # Bucle: evaluar pareja por pareja
+  for (i in 1:num_comb) {
+    g1 <- combinaciones[1, i]
+    g2 <- combinaciones[2, i]
+    
+    p1 <- p_j[g1]
+    p2 <- p_j[g2]
+    n1 <- n_j[g1]
+    n2 <- n_j[g2]
+    
+    # Diferencia real absoluta
+    dif_abs <- abs(p1 - p2)
+    
+    # Calcular margen de tolerancia (m_jj') con el error estándar
+    error_estandar <- sqrt((p1 * (1 - p1) / n1) + (p2 * (1 - p2) / n2))
+    m_jj <- sqrt(chi_critico) * error_estandar
+    
+    # Guardar los datos en la tabla de resultados
+    resultados$Par[i] <- paste(g1, "vs", g2)
+    resultados$Diferencia_Abs[i] <- round(dif_abs, 4)
+    resultados$Margen_Tolerancia[i] <- round(m_jj, 4)
+    resultados$Significativo[i] <- ifelse(dif_abs > m_jj, "Sí", "No")
+  }
+  
+  return(resultados)
   
 }
