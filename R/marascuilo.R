@@ -78,12 +78,12 @@ marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0
 #' @import ggplot2
 plot_marascuilo <- function(resultados) {
   
-  # Asegurar que la librería de gráficos está cargada
   require(ggplot2)
   
   grafico <- ggplot(resultados, aes(x = Par, y = Diferencia_Abs, fill = Significativo)) +
     geom_col(alpha = 0.8) +
-    geom_point(aes(y = Margen_Tolerancia), color = "black", size = 4, shape = 4) +
+    # shape = 4 devuelve la 'X'. show.legend = FALSE la expulsa de los recuadros laterales.
+    geom_point(aes(y = Margen_Tolerancia), color = "black", size = 4, shape = 4, show.legend = FALSE) +
     scale_fill_manual(
       name = "Conclusión del test:",
       values = c("Diferentes" = "#b37079", "Estadísticamente iguales" = "#02d963")
