@@ -82,6 +82,7 @@ plot_marascuilo <- function(resultados) {
   # por si acaso no la tienen cargada
   require(ggplot2)
   
+  # para preparar donde se va a dibujar
   grafico <- ggplot(resultados, aes(x = Par, y = Diferencia_Abs, fill = Significativo)) +
     geom_col(alpha = 0.8) +
     # pongo la x indicando el margen y la quito de la leyenda.
