@@ -9,6 +9,18 @@
 #' @return A data.frame with the results of the pairwise comparisons.
 #' @export
 #' @import purrr
+#' 
+#' @examples
+#' df_ejemplo <- data.frame(
+#'   Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+#'   Opinion = c(
+#'     rep("De acuerdo", 115), rep("En desacuerdo", 35),
+#'     rep("De acuerdo", 53), rep("En desacuerdo", 22),
+#'     rep("De acuerdo", 40), rep("En desacuerdo", 35)
+#'   )
+#' )
+#' resultados <- marascuilo_test(df_ejemplo, "Ciudad", "Opinion", "De acuerdo")
+#' print(resultados)
 marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0.05) {
   
   # Generate a two-way contingency table
@@ -63,6 +75,18 @@ marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0
 #' @return A ggplot object visualizing the pairwise comparisons.
 #' @export
 #' @import ggplot2
+#' 
+#' @examples
+#' df_ejemplo <- data.frame(
+#'   Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+#'   Opinion = c(
+#'     rep("De acuerdo", 115), rep("En desacuerdo", 35),
+#'     rep("De acuerdo", 53), rep("En desacuerdo", 22),
+#'     rep("De acuerdo", 40), rep("En desacuerdo", 35)
+#'   )
+#' )
+#' res <- marascuilo_test(df_ejemplo, "Ciudad", "Opinion", "De acuerdo")
+#' plot_marascuilo(res)
 plot_marascuilo <- function(resultados) {
   
   # Initialize plot: mapping differences to bars and significance to fill color

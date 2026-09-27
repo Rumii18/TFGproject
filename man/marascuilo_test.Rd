@@ -2,24 +2,36 @@
 % Please edit documentation in R/marascuilo.R
 \name{marascuilo_test}
 \alias{marascuilo_test}
-\title{Test de Marascuilo}
+\title{Marascuilo Test}
 \usage{
 marascuilo_test(df, col_grupo, col_respuesta, valor_exito, alpha = 0.05)
 }
 \arguments{
-\item{df}{Un data.frame con los datos crudos.}
+\item{df}{A data.frame containing the raw data.}
 
-\item{col_grupo}{Nombre de la columna que contiene las categorías/grupos.}
+\item{col_grupo}{Name of the column containing the categories/groups.}
 
-\item{col_respuesta}{Nombre de la columna con las respuestas (ej. de acuerdo/en desacuerdo).}
+\item{col_respuesta}{Name of the column with the responses (e.g., agree/disagree).}
 
-\item{valor_exito}{El valor específico en col_respuesta del que se calculará la proporción.}
+\item{valor_exito}{The specific value in col_respuesta for which the proportion will be calculated.}
 
-\item{alpha}{Nivel de significación (por defecto 0.05).}
+\item{alpha}{Significance level (default is 0.05).}
 }
 \value{
-Un data.frame con los resultados de las comparaciones.
+A data.frame with the results of the pairwise comparisons.
 }
 \description{
-Test de Marascuilo
+Marascuilo Test
+}
+\examples{
+df_ejemplo <- data.frame(
+  Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+  Opinion = c(
+    rep("De acuerdo", 115), rep("En desacuerdo", 35),
+    rep("De acuerdo", 53), rep("En desacuerdo", 22),
+    rep("De acuerdo", 40), rep("En desacuerdo", 35)
+  )
+)
+resultados <- marascuilo_test(df_ejemplo, "Ciudad", "Opinion", "De acuerdo")
+print(resultados)
 }
