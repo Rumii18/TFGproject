@@ -1,11 +1,10 @@
 Package: TFGproject
-Title: What the Package Does (One Line, Title Case)
+Title: Marascuilo Procedure for Multiple Proportions Comparison
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Hugo", "Rumi", email = "hugorumigarcia@gmail.com", role = c("aut", "cre"))
+Description: Performs the Marascuilo procedure to compare multiple proportions simultaneously. It provides both the statistical test results and a visual representation of the pairwise comparisons.
+License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
