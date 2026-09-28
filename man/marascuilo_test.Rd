@@ -18,7 +18,7 @@ marascuilo_test(df, col_grupo, col_respuesta, valor_exito, alpha = 0.05)
 \item{alpha}{Significance level (default is 0.05).}
 }
 \value{
-A data.frame with the results of the pairwise comparisons.
+An object of class \code{marascuilo} containing a data.frame with the pairwise comparisons.
 }
 \description{
 Marascuilo Test
@@ -33,5 +33,4 @@ df_ejemplo <- data.frame(
   )
 )
 resultados <- marascuilo_test(df_ejemplo, "Ciudad", "Opinion", "De acuerdo")
-print(resultados)
 }
