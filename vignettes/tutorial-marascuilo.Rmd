@@ -1,0 +1,69 @@
+---
+title: "Tutorial: Marascuilo Procedure"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tutorial: Marascuilo Procedure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+The `TFGproject` package provides an easy-to-use implementation of the Marascuilo procedure. This test is typically used after a significant Chi-square test to determine exactly which groups differ from each other when comparing multiple proportions.
+
+## Setup
+
+First, load the package into your environment:
+
+```{r setup}
+library(TFGproject)
+```
+
+## Example Data
+
+Let's create a sample dataset representing a survey about a specific opinion across three different cities:
+
+```{r data}
+df_ejemplo <- data.frame(
+  Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+  Opinion = c(
+    rep("De acuerdo", 115), rep("En desacuerdo", 35),
+    rep("De acuerdo", 53), rep("En desacuerdo", 22),
+    rep("De acuerdo", 40), rep("En desacuerdo", 35)
+  )
+)
+```
+
+## Running the Test
+
+We use the `marascuilo_test()` function. We need to specify the dataset, the grouping column, the response column, and the specific value that represents a "success" (in this case, "De acuerdo").
+
+```{r test}
+resultados <- marascuilo_test(
+  df = df_ejemplo, 
+  col_grupo = "Ciudad", 
+  col_respuesta = "Opinion", 
+  valor_exito = "De acuerdo"
+)
+```
+
+## Results and Visualization
+
+Because the package uses a custom S3 class architecture, you can simply print the object to see the results and which comparisons are statistically significant:
+
+```{r print}
+resultados
+```
+
+To visually interpret these results, use the generic `plot()` function. It will automatically generate a `ggplot2` chart showing the confidence intervals for each pair of differences:
+
+```{r plot, fig.width=7, fig.height=5}
+plot(resultados)
+```
