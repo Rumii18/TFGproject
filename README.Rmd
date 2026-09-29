@@ -1,9 +1,20 @@
+---
+output: github_document
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # TFGproject
 
-The goal of TFGproject is to provide an easy and robust implementation
-of the Marascuilo procedure for multiple comparisons of proportions,
-compliant with standard S3 class architecture.
+The goal of TFGproject is to provide an easy and robust implementation of the Marascuilo procedure for multiple comparisons of proportions, compliant with standard S3 class architecture.
 
 ## Installation
 
@@ -16,10 +27,9 @@ devtools::install_github("Rumii18/TFGproject")
 
 ## Example
 
-This is a basic example which shows how to solve a common problem using
-the package’s generic methods:
+This is a basic example which shows how to solve a common problem using the package's generic methods:
 
-``` r
+```{r example}
 library(TFGproject)
 
 # 1. Create a sample dataset
@@ -42,18 +52,7 @@ resultados <- marascuilo_test(
 
 # 3. Print the results (using the custom print method)
 resultados
-#> 
-#> --- Marascuilo Procedure Results ---
-#> 
-#>                               Pair Absolute_Diff Critical_Range    Significance
-#> Cordoba...1      Cordoba vs Rio IV        0.2333         0.1644     Significant
-#> Cordoba...2 Cordoba vs Villa Maria        0.0600         0.1540 Not Significant
-#> Rio IV       Rio IV vs Villa Maria        0.1733         0.1909 Not Significant
-#> 
-#> ------------------------------------
 
 # 4. Visualize the comparisons (using the generic plot method)
 plot(resultados)
 ```
-
-<img src="man/figures/README-example-1.png" alt="" width="100%" />
