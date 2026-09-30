@@ -66,7 +66,7 @@ server <- function(input, output, session) {
   
   output$plot_output <- renderPlot({
     req(marascuilo_results())
-    plot(marascuilo_results())
+    ggplot2::autoplot(marascuilo_results())
   })
 }
 

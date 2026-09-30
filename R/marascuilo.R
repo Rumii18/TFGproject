@@ -87,16 +87,16 @@ print.marascuilo <- function(x, ...) {
   invisible(x)
 }
 
-#' Plot method for marascuilo objects
+#' Autoplot method for marascuilo objects
 #'
-#' @param x An object of class \code{marascuilo}.
-#' @param ... Additional arguments passed to plot.
+#' @param object An object of class \code{marascuilo}.
+#' @param ... Additional arguments.
 #' @return A ggplot object visualizing the pairwise comparisons.
 #' @export
 #' @import ggplot2
-plot.marascuilo <- function(x, ...) {
+autoplot.marascuilo <- function(object, ...) {
   
-  grafico <- ggplot(x, aes(x = Pair, y = Absolute_Diff, fill = Significance)) +
+  grafico <- ggplot(object, aes(x = Pair, y = Absolute_Diff, fill = Significance)) +
     geom_col(alpha = 0.8) +
     geom_point(aes(y = Critical_Range), color = "black", size = 4, shape = 4, show.legend = FALSE) +
     scale_fill_manual(
