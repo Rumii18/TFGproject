@@ -2,26 +2,41 @@
 % Please edit documentation in R/marascuilo.R
 \name{marascuilo_test}
 \alias{marascuilo_test}
-\title{Marascuilo Test}
+\title{Marascuilo Procedure for Multiple Comparisons of Proportions}
 \usage{
 marascuilo_test(df, col_grupo, col_respuesta, valor_exito, alpha = 0.05)
 }
 \arguments{
-\item{df}{A data.frame containing the raw data.}
+\item{df}{A \code{data.frame} containing the raw categorical data.}
 
-\item{col_grupo}{Name of the column containing the categories/groups.}
+\item{col_grupo}{Character string specifying the column name that defines the categories/groups.}
 
-\item{col_respuesta}{Name of the column with the responses (e.g., agree/disagree).}
+\item{col_respuesta}{Character string specifying the column name with the responses (e.g., agree/disagree).}
 
-\item{valor_exito}{The specific value in col_respuesta for which the proportion will be calculated.}
+\item{valor_exito}{Character string indicating the specific value in \code{col_respuesta} considered as statistical success.}
 
-\item{alpha}{Significance level (default is 0.05).}
+\item{alpha}{Numeric value indicating the significance level (default is \code{0.05}).}
 }
 \value{
-An object of class \code{marascuilo} containing a data.frame with the pairwise comparisons.
+An object of S3 class \code{marascuilo} (inheriting from \code{data.frame})
+containing the pairwise comparisons with four columns: \code{Pair},
+\code{Absolute_Diff}, \code{Critical_Range}, and \code{Significance}.
 }
 \description{
-Marascuilo Test
+Computes and evaluates all possible pairwise comparisons among proportions
+across multiple independent groups from a raw dataset. Following a
+statistically significant global test of homogeneity, this procedure
+identifies which specific pairs of proportions differ significantly while
+controlling the overall family-wise error rate.
+}
+\note{
+For any pair of groups \eqn{i} and \eqn{j}, the mathematical procedure compares
+the observed absolute difference between sample proportions, \eqn{|\hat{p}_i - \hat{p}_j|},
+against a critical range \eqn{r_{ij}} defined as:
+\deqn{r_{ij} = \sqrt{\chi^2_{1-\alpha, df}} \cdot \sqrt{\frac{\hat{p}_i(1-\hat{p}_i)}{n_i} + \frac{\hat{p}_j(1-\hat{p}_j)}{n_j}}}
+where \eqn{\chi^2_{1-\alpha, df}} is the critical value from the chi-square distribution
+and \eqn{n_i, n_j} are the respective sample sizes for each group. A pairwise
+comparison is declared statistically significant if \eqn{|\hat{p}_i - \hat{p}_j| > r_{ij}}.
 }
 \examples{
 df_ejemplo <- data.frame(
@@ -33,4 +48,11 @@ df_ejemplo <- data.frame(
   )
 )
 resultados <- marascuilo_test(df_ejemplo, "Ciudad", "Opinion", "De acuerdo")
+print(resultados)
+autoplot(resultados)
+}
+\references{
+Marascuilo, L. A. (1966). Large-sample multiple comparisons. \emph{Psychological Bulletin}, 65(5), 280-290.
+
+NIST/SEMATECH (2012). \emph{e-Handbook of Statistical Methods}, Section 7.4.7.4 (Marascuilo procedure). National Institute of Standards and Technology.
 }

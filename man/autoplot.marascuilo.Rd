@@ -12,8 +12,9 @@
 \item{...}{Additional arguments.}
 }
 \value{
-A ggplot object visualizing the pairwise comparisons.
+A \code{ggplot} object visualizing the pairwise comparisons.
 }
 \description{
-Autoplot method for marascuilo objects
+Generates a bar chart comparing the observed absolute differences against
+the critical ranges for each pair of groups using \code{ggplot2}.
 }

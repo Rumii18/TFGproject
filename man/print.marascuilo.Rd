@@ -9,8 +9,11 @@
 \arguments{
 \item{x}{An object of class \code{marascuilo}.}
 
-\item{...}{Additional arguments passed to print.}
+\item{...}{Additional arguments passed to \code{print}.}
+}
+\value{
+Invisibly returns the original \code{marascuilo} object.
 }
 \description{
-Print method for marascuilo objects
+Prints a formatted tabular summary of the Marascuilo procedure results to the console.
 }
