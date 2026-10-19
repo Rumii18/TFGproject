@@ -1,8 +1,10 @@
 Package: TFGproject
 Title: Marascuilo Procedure for Multiple Proportions Comparison
 Version: 0.0.0.9000
-Authors@R: 
-    person("Hugo", "Rumi", email = "hugorumigarcia@gmail.com", role = c("aut", "cre"))
+Authors@R: c(
+    person("Hugo", "Rumi", email = "hugorumigarcia@gmail.com", role = c("aut", "cre")),
+    person("Emilio", "López Cano", email = "emilio.lopez@urjc.es", role = c("ctb"))
+  )
 Description: Performs the Marascuilo procedure to compare multiple proportions simultaneously. It provides both the statistical test results and a visual representation of the pairwise comparisons.
 License: GPL-3
 Encoding: UTF-8
