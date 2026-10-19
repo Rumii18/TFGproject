@@ -20,10 +20,11 @@ The `TFGproject` package provides an easy-to-use implementation of the Marascuil
 
 ## Setup
 
-First, load the package into your environment:
+First, load the package and `ggplot2` into your environment:
 
 ```{r setup}
 library(TFGproject)
+library(ggplot2)
 ```
 
 ## Example Data
@@ -62,8 +63,24 @@ Because the package uses a custom S3 class architecture, you can simply print th
 resultados
 ```
 
-To visually interpret these results, use the generic `plot()` function. It will automatically generate a `ggplot2` chart showing the confidence intervals for each pair of differences:
+To visually interpret these results, use the `autoplot()` function. It will automatically generate a `ggplot2` chart comparing the absolute differences against the critical ranges for each pair:
 
 ```{r plot, fig.width=7, fig.height=5}
-plot(resultados)
+autoplot(resultados)
+```
+
+## Sample Data and Shiny Application
+
+The package includes a built-in CSV sample dataset. You can access its path and load it using `system.file()`:
+
+```{r csv_example}
+ruta_csv <- system.file("extdata", "datos_ejemplo.csv", package = "TFGproject")
+datos_csv <- read.csv(ruta_csv)
+head(datos_csv)
+```
+
+To launch the interactive Shiny web application included in the package, run the following command in your R console:
+
+``` r
+shiny::runApp(system.file("app", package = "TFGproject"))
 ```

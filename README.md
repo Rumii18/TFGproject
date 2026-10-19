@@ -21,6 +21,7 @@ the package’s generic methods:
 
 ``` r
 library(TFGproject)
+library(ggplot2)
 
 # 1. Create a sample dataset
 df_ejemplo <- data.frame(
@@ -52,8 +53,33 @@ resultados
 #> 
 #> ------------------------------------
 
-# 4. Visualize the comparisons (using the generic plot method)
-plot(resultados)
+# 4. Visualize the comparisons (using the autoplot method)
+autoplot(resultados)
 ```
 
 <img src="man/figures/README-example-1.png" alt="" width="100%" />
+
+## Sample Data and Shiny Application
+
+The package includes a built-in CSV sample dataset. You can access its
+path and load it using `system.file()`:
+
+``` r
+ruta_csv <- system.file("extdata", "datos_ejemplo.csv", package = "TFGproject")
+datos_csv <- read.csv(ruta_csv)
+head(datos_csv)
+#>    Ciudad    Opinion
+#> 1 Cordoba De acuerdo
+#> 2 Cordoba De acuerdo
+#> 3 Cordoba De acuerdo
+#> 4 Cordoba De acuerdo
+#> 5 Cordoba De acuerdo
+#> 6 Cordoba De acuerdo
+```
+
+To launch the interactive Shiny web application included in the package,
+run the following command in your R console:
+
+``` r
+shiny::runApp(system.file("app", package = "TFGproject"))
+```

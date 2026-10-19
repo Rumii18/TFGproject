@@ -2,7 +2,6 @@
 output: github_document
 ---
 
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -31,6 +30,7 @@ This is a basic example which shows how to solve a common problem using the pack
 
 ```{r example}
 library(TFGproject)
+library(ggplot2)
 
 # 1. Create a sample dataset
 df_ejemplo <- data.frame(
@@ -53,6 +53,22 @@ resultados <- marascuilo_test(
 # 3. Print the results (using the custom print method)
 resultados
 
-# 4. Visualize the comparisons (using the generic plot method)
-plot(resultados)
+# 4. Visualize the comparisons (using the autoplot method)
+autoplot(resultados)
+```
+
+## Sample Data and Shiny Application
+
+The package includes a built-in CSV sample dataset. You can access its path and load it using `system.file()`:
+
+```{r csv_example}
+ruta_csv <- system.file("extdata", "datos_ejemplo.csv", package = "TFGproject")
+datos_csv <- read.csv(ruta_csv)
+head(datos_csv)
+```
+
+To launch the interactive Shiny web application included in the package, run the following command in your R console:
+
+``` r
+shiny::runApp(system.file("app", package = "TFGproject"))
 ```
