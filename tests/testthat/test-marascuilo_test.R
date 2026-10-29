@@ -1,16 +1,16 @@
 test_that("marascuilo_test returns the correct structure and dimensions", {
   # 1. Setup the scenario with exact data from the TFG
   df_ejemplo <- data.frame(
-    Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+    City = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
     Opinion = c(
-      rep("De acuerdo", 115), rep("En desacuerdo", 35),
-      rep("De acuerdo", 53), rep("En desacuerdo", 22),
-      rep("De acuerdo", 40), rep("En desacuerdo", 35)
+      rep("Agree", 115), rep("Disagree", 35),
+      rep("Agree", 53), rep("Disagree", 22),
+      rep("Agree", 40), rep("Disagree", 35)
     )
   )
 
   # 2. Execute the function
-  resultados <- marascuilo_test(df_ejemplo, "Ciudad", "Opinion", "De acuerdo")
+  resultados <- marascuilo_test(df_ejemplo, "City", "Opinion", "Agree")
 
   # 3. Verify the output structure
   expect_s3_class(resultados, "data.frame")
@@ -22,30 +22,30 @@ test_that("marascuilo_test returns the correct structure and dimensions", {
 
 test_that("marascuilo_test throws error with invalid column names", {
   df_ejemplo <- data.frame(
-    Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+    City = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
     Opinion = c(
-      rep("De acuerdo", 115), rep("En desacuerdo", 35),
-      rep("De acuerdo", 53), rep("En desacuerdo", 22),
-      rep("De acuerdo", 40), rep("En desacuerdo", 35)
+      rep("Agree", 115), rep("Disagree", 35),
+      rep("Agree", 53), rep("Disagree", 22),
+      rep("Agree", 40), rep("Disagree", 35)
     )
   )
 
   # Force errors by passing column names that do not exist in df_ejemplo
-  expect_error(marascuilo_test(df_ejemplo, "ColumnaFalsa", "Opinion", "De acuerdo"))
-  expect_error(marascuilo_test(df_ejemplo, "Ciudad", "OpinionFalsa", "De acuerdo"))
+  expect_error(marascuilo_test(df_ejemplo, "FakeColumn", "Opinion", "Agree"))
+  expect_error(marascuilo_test(df_ejemplo, "City", "FakeOpinion", "Agree"))
 })
 
 test_that("marascuilo_test calculates absolute differences correctly", {
   df_ejemplo <- data.frame(
-    Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+    City = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
     Opinion = c(
-      rep("De acuerdo", 115), rep("En desacuerdo", 35),
-      rep("De acuerdo", 53), rep("En desacuerdo", 22),
-      rep("De acuerdo", 40), rep("En desacuerdo", 35)
+      rep("Agree", 115), rep("Disagree", 35),
+      rep("Agree", 53), rep("Disagree", 22),
+      rep("Agree", 40), rep("Disagree", 35)
     )
   )
 
-  resultados <- marascuilo_test(df_ejemplo, "Ciudad", "Opinion", "De acuerdo")
+  resultados <- marascuilo_test(df_ejemplo, "City", "Opinion", "Agree")
 
   # Strict mathematical verification:
   # Proportion Cordoba = 115/150 = 0.7666...
