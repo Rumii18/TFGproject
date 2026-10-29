@@ -35,17 +35,18 @@
 #' @import purrr
 #' 
 #' @examples
+#' library(ggplot2)
 #' df_ejemplo <- data.frame(
-#'   Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+#'   City = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
 #'   Opinion = c(
-#'     rep("De acuerdo", 115), rep("En desacuerdo", 35),
-#'     rep("De acuerdo", 53), rep("En desacuerdo", 22),
-#'     rep("De acuerdo", 40), rep("En desacuerdo", 35)
+#'     rep("Agree", 115), rep("Disagree", 35),
+#'     rep("Agree", 53), rep("Disagree", 22),
+#'     rep("Agree", 40), rep("Disagree", 35)
 #'   )
 #' )
-#' resultados <- marascuilo_test(df_ejemplo, "Ciudad", "Opinion", "De acuerdo")
+#' resultados <- marascuilo_test(df_ejemplo, "City", "Opinion", "Agree")
 #' print(resultados)
-#' autoplot(resultados)
+#' ggplot2::autoplot(resultados)
 marascuilo_test <- function(df, col_grupo, col_respuesta, valor_exito, alpha = 0.05) {
   
   # Explicit error handling for missing columns

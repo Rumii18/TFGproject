@@ -68,15 +68,16 @@ Technology.
 ## Examples
 
 ``` r
+library(ggplot2)
 df_ejemplo <- data.frame(
-  Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+  City = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
   Opinion = c(
-    rep("De acuerdo", 115), rep("En desacuerdo", 35),
-    rep("De acuerdo", 53), rep("En desacuerdo", 22),
-    rep("De acuerdo", 40), rep("En desacuerdo", 35)
+    rep("Agree", 115), rep("Disagree", 35),
+    rep("Agree", 53), rep("Disagree", 22),
+    rep("Agree", 40), rep("Disagree", 35)
   )
 )
-resultados <- marascuilo_test(df_ejemplo, "Ciudad", "Opinion", "De acuerdo")
+resultados <- marascuilo_test(df_ejemplo, "City", "Opinion", "Agree")
 print(resultados)
 #> 
 #> --- Marascuilo Procedure Results ---
@@ -87,6 +88,5 @@ print(resultados)
 #> Rio IV       Rio IV vs Villa Maria        0.1733         0.1909 Not Significant
 #> 
 #> ------------------------------------
-autoplot(resultados)
-#> Error in autoplot(resultados): could not find function "autoplot"
+ggplot2::autoplot(resultados)
 ```
