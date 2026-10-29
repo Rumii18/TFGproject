@@ -94,13 +94,13 @@ path and load it using
 ruta_csv <- system.file("extdata", "datos_ejemplo.csv", package = "TFGproject")
 datos_csv <- read.csv(ruta_csv)
 head(datos_csv)
-#>    Ciudad    Opinion
-#> 1 Cordoba De acuerdo
-#> 2 Cordoba De acuerdo
-#> 3 Cordoba De acuerdo
-#> 4 Cordoba De acuerdo
-#> 5 Cordoba De acuerdo
-#> 6 Cordoba De acuerdo
+#>      City Opinion
+#> 1 Cordoba   Agree
+#> 2 Cordoba   Agree
+#> 3 Cordoba   Agree
+#> 4 Cordoba   Agree
+#> 5 Cordoba   Agree
+#> 6 Cordoba   Agree
 ```
 
 To launch the interactive Shiny web application included in the package,
