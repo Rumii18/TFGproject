@@ -87,11 +87,11 @@ environment:</p>
 opinion across three different cities:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_ejemplo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Ciudad <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Cordoba"</span>, <span class="fl">150</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Villa Maria"</span>, <span class="fl">75</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Rio IV"</span>, <span class="fl">75</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  City <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Cordoba"</span>, <span class="fl">150</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Villa Maria"</span>, <span class="fl">75</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Rio IV"</span>, <span class="fl">75</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  Opinion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"De acuerdo"</span>, <span class="fl">115</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"En desacuerdo"</span>, <span class="fl">35</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"De acuerdo"</span>, <span class="fl">53</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"En desacuerdo"</span>, <span class="fl">22</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"De acuerdo"</span>, <span class="fl">40</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"En desacuerdo"</span>, <span class="fl">35</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Agree"</span>, <span class="fl">115</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Disagree"</span>, <span class="fl">35</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Agree"</span>, <span class="fl">53</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Disagree"</span>, <span class="fl">22</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Agree"</span>, <span class="fl">40</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Disagree"</span>, <span class="fl">35</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -100,14 +100,13 @@ opinion across three different cities:</p>
 </h2>
 <p>We use the <code><a href="../reference/marascuilo_test.html">marascuilo_test()</a></code> function. We need to
 specify the dataset, the grouping column, the response column, and the
-specific value that represents a “success” (in this case, “De
-acuerdo”).</p>
+specific value that represents a “success” (in this case, “Agree”).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resultados</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/marascuilo_test.html">marascuilo_test</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_ejemplo</span>, </span>
-<span>  col_grupo <span class="op">=</span> <span class="st">"Ciudad"</span>, </span>
+<span>  col_grupo <span class="op">=</span> <span class="st">"City"</span>, </span>
 <span>  col_respuesta <span class="op">=</span> <span class="st">"Opinion"</span>, </span>
-<span>  valor_exito <span class="op">=</span> <span class="st">"De acuerdo"</span></span>
+<span>  valor_exito <span class="op">=</span> <span class="st">"Agree"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -132,7 +131,7 @@ function. It will automatically generate a <code>ggplot2</code> chart
 comparing the absolute differences against the critical ranges for each
 pair:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">resultados</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">resultados</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tutorial-marascuilo_files/figure-html/plot-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2">
@@ -144,13 +143,13 @@ its path and load it using <code><a href="https://rdrr.io/r/base/system.file.htm
 <code class="sourceCode R"><span><span class="va">ruta_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"datos_ejemplo.csv"</span>, package <span class="op">=</span> <span class="st">"TFGproject"</span><span class="op">)</span></span>
 <span><span class="va">datos_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">ruta_csv</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">datos_csv</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    Ciudad    Opinion</span></span>
-<span><span class="co">#&gt; 1 Cordoba De acuerdo</span></span>
-<span><span class="co">#&gt; 2 Cordoba De acuerdo</span></span>
-<span><span class="co">#&gt; 3 Cordoba De acuerdo</span></span>
-<span><span class="co">#&gt; 4 Cordoba De acuerdo</span></span>
-<span><span class="co">#&gt; 5 Cordoba De acuerdo</span></span>
-<span><span class="co">#&gt; 6 Cordoba De acuerdo</span></span></code></pre></div>
+<span><span class="co">#&gt;      City Opinion</span></span>
+<span><span class="co">#&gt; 1 Cordoba   Agree</span></span>
+<span><span class="co">#&gt; 2 Cordoba   Agree</span></span>
+<span><span class="co">#&gt; 3 Cordoba   Agree</span></span>
+<span><span class="co">#&gt; 4 Cordoba   Agree</span></span>
+<span><span class="co">#&gt; 5 Cordoba   Agree</span></span>
+<span><span class="co">#&gt; 6 Cordoba   Agree</span></span></code></pre></div>
 <p>To launch the interactive Shiny web application included in the
 package, run the following command in your R console:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">

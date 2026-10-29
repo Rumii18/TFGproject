@@ -25,11 +25,11 @@ opinion across three different cities:
 ``` r
 
 df_ejemplo <- data.frame(
-  Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+  City = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
   Opinion = c(
-    rep("De acuerdo", 115), rep("En desacuerdo", 35),
-    rep("De acuerdo", 53), rep("En desacuerdo", 22),
-    rep("De acuerdo", 40), rep("En desacuerdo", 35)
+    rep("Agree", 115), rep("Disagree", 35),
+    rep("Agree", 53), rep("Disagree", 22),
+    rep("Agree", 40), rep("Disagree", 35)
   )
 )
 ```
@@ -39,15 +39,15 @@ df_ejemplo <- data.frame(
 We use the [`marascuilo_test()`](../reference/marascuilo_test.md)
 function. We need to specify the dataset, the grouping column, the
 response column, and the specific value that represents a “success” (in
-this case, “De acuerdo”).
+this case, “Agree”).
 
 ``` r
 
 resultados <- marascuilo_test(
   df = df_ejemplo, 
-  col_grupo = "Ciudad", 
+  col_grupo = "City", 
   col_respuesta = "Opinion", 
-  valor_exito = "De acuerdo"
+  valor_exito = "Agree"
 )
 ```
 
@@ -78,7 +78,7 @@ absolute differences against the critical ranges for each pair:
 
 ``` r
 
-autoplot(resultados)
+ggplot2::autoplot(resultados)
 ```
 
 ![](tutorial-marascuilo_files/figure-html/plot-1.png)
@@ -94,13 +94,13 @@ path and load it using
 ruta_csv <- system.file("extdata", "datos_ejemplo.csv", package = "TFGproject")
 datos_csv <- read.csv(ruta_csv)
 head(datos_csv)
-#>    Ciudad    Opinion
-#> 1 Cordoba De acuerdo
-#> 2 Cordoba De acuerdo
-#> 3 Cordoba De acuerdo
-#> 4 Cordoba De acuerdo
-#> 5 Cordoba De acuerdo
-#> 6 Cordoba De acuerdo
+#>      City Opinion
+#> 1 Cordoba   Agree
+#> 2 Cordoba   Agree
+#> 3 Cordoba   Agree
+#> 4 Cordoba   Agree
+#> 5 Cordoba   Agree
+#> 6 Cordoba   Agree
 ```
 
 To launch the interactive Shiny web application included in the package,

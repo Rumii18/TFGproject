@@ -33,25 +33,25 @@ Let's create a sample dataset representing a survey about a specific opinion acr
 
 ```{r data}
 df_ejemplo <- data.frame(
-  Ciudad = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
+  City = c(rep("Cordoba", 150), rep("Villa Maria", 75), rep("Rio IV", 75)),
   Opinion = c(
-    rep("De acuerdo", 115), rep("En desacuerdo", 35),
-    rep("De acuerdo", 53), rep("En desacuerdo", 22),
-    rep("De acuerdo", 40), rep("En desacuerdo", 35)
+    rep("Agree", 115), rep("Disagree", 35),
+    rep("Agree", 53), rep("Disagree", 22),
+    rep("Agree", 40), rep("Disagree", 35)
   )
 )
 ```
 
 ## Running the Test
 
-We use the `marascuilo_test()` function. We need to specify the dataset, the grouping column, the response column, and the specific value that represents a "success" (in this case, "De acuerdo").
+We use the `marascuilo_test()` function. We need to specify the dataset, the grouping column, the response column, and the specific value that represents a "success" (in this case, "Agree").
 
 ```{r test}
 resultados <- marascuilo_test(
   df = df_ejemplo, 
-  col_grupo = "Ciudad", 
+  col_grupo = "City", 
   col_respuesta = "Opinion", 
-  valor_exito = "De acuerdo"
+  valor_exito = "Agree"
 )
 ```
 
@@ -66,7 +66,7 @@ resultados
 To visually interpret these results, use the `autoplot()` function. It will automatically generate a `ggplot2` chart comparing the absolute differences against the critical ranges for each pair:
 
 ```{r plot, fig.width=7, fig.height=5}
-autoplot(resultados)
+ggplot2::autoplot(resultados)
 ```
 
 ## Sample Data and Shiny Application
@@ -81,6 +81,6 @@ head(datos_csv)
 
 To launch the interactive Shiny web application included in the package, run the following command in your R console:
 
-``` r
+```r
 shiny::runApp(system.file("app", package = "TFGproject"))
 ```
